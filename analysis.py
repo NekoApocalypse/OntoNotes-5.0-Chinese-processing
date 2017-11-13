@@ -37,7 +37,7 @@ def sentence_slice(str):
     :return: list of (word, type) sequence
     '''
     if re.search(r'(\<DOC)|(\<\/DOC)', str) is not None:
-        return None
+        return []
     sliced = (re.sub(r'X T', r'X_T', str)).split()
     return [entity_slice(x) for x in sliced]
 
@@ -114,12 +114,13 @@ def entity_collect():
 if __name__=='__main__':
     dir = onto_50_path + '/nw'
     file_list = glob.glob(dir+'/**/*.name', recursive = True)
-    test_file = file_list[0]
-    with open(test_file, encoding='utf-8') as f:
-        line = f.readline()
-        line = f.readline()
-    print(line)
-    sliced = sentence_slice(line)
-    print(sliced)
-    print(potential_relation(sliced, 10))
+    relation_matrix = np.zeros([11,11], dtype=int)
+    for file in file_list:
+        print(file)
+        with open(file, encoding='utf-8') as f:
+            article = []
+            for line in f:
+                article.extend(sentence_slice(line))
+            relation_matrix += potential_relation(article, 10)
+    print(relation_matrix)
 
