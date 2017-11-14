@@ -24,7 +24,7 @@ origin data and 70K parallel English origin data. <br/>
 The telephone conversation corpus comprises about 100K of Chinese CallHome data
 annotated with parse, proposition, name and coreference information. <br/>
 
-### Sources
+### Genres
 > BC = Broadcast Conversation <br/>
 > BN = Broadcast News <br/>
 > MZ = Magazine <br/>
